@@ -1,4 +1,4 @@
-import { Container, HistoryList } from './styled'
+import { Container, HistoryList, Status } from './styled'
 
 export function History() {
   return (
@@ -19,43 +19,57 @@ export function History() {
               <td>Tarefa</td>
               <td>20 minutos</td>
               <td>Há 2 meses</td>
-              <td>Concluído</td>
+              <td>
+                <Status statusColor="green">Concluido</Status>
+              </td>
             </tr>
             <tr>
               <td>Tarefa</td>
               <td>20 minutos</td>
               <td>Há 2 meses</td>
-              <td>Concluído</td>
+              <td>
+                <Status statusColor="yellow">Concluido</Status>
+              </td>
             </tr>
             <tr>
               <td>Tarefa</td>
               <td>20 minutos</td>
               <td>Há 2 meses</td>
-              <td>Concluído</td>
+              <td>
+                <Status statusColor="red">Concluido</Status>
+              </td>
             </tr>
             <tr>
               <td>Tarefa</td>
               <td>20 minutos</td>
               <td>Há 2 meses</td>
-              <td>Concluído</td>
+              <td>
+                <Status statusColor="green">Concluido</Status>
+              </td>
             </tr>
             <tr>
               <td>Tarefa</td>
               <td>20 minutos</td>
               <td>Há 2 meses</td>
-              <td>Concluído</td>
+              <td>
+                <Status statusColor="green">Concluido</Status>
+              </td>
             </tr>
             <tr>
               <td>Tarefa</td>
               <td>20 minutos</td>
               <td>Há 2 meses</td>
-              <td>Concluído</td>
+              <td>
+                <Status statusColor="green">Concluido</Status>
+              </td>
             </tr>
             <tr>
               <td>Tarefa</td>
               <td>20 minutos</td>
               <td>Há 2 meses</td>
-              <td>Concluído</td>
+              <td>
+                <Status statusColor="red">Interrompido</Status>
+              </td>
             </tr>
           </tbody>
         </table>
