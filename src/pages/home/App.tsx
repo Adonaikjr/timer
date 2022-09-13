@@ -1,4 +1,7 @@
 import { Play } from 'phosphor-react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as zod from 'zod'
 import Span, {
   Container,
   Form,
@@ -10,10 +13,29 @@ import Span, {
   InputName,
   InputMinutes,
 } from './styled'
+
+const newCycleFormValidationSchema = zod.object({
+  task: zod.string().min(1, 'Informe a tarefa'),
+  minutesAmount: zod
+    .number()
+    .min(5, 'O ciclo precisa ser de no mínimo 5 minutos.')
+    .max(60, 'O ciclo precisa ser de no máximo 60 minutos.'),
+})
+
 export function App() {
+  const { register, handleSubmit, watch } = useForm({
+    resolver: zodResolver(newCycleFormValidationSchema),
+  })
+  function handleCreateNewCycle(data: any) {
+    console.log(data)
+  }
+
+  const task = watch('task')
+  const isSubmitDisable = !task
+
   return (
     <Container>
-      <Form>
+      <Form onSubmit={handleSubmit(handleCreateNewCycle)}>
         <Content>
           <Label htmlFor="">Vou trabalhar em: </Label>
           <InputName
@@ -21,6 +43,7 @@ export function App() {
             id="task"
             list="projects_recents"
             placeholder="exmplo:Focus time"
+            {...register('task')}
           />
 
           <datalist id="projects_recents">
@@ -38,6 +61,7 @@ export function App() {
             step={5}
             min={5}
             max={60}
+            {...register('minutesAmount', { valueAsNumber: true })}
           />
 
           <Span>Minutos.</Span>
@@ -51,7 +75,7 @@ export function App() {
           <span>0</span>
         </MinutesContent>
 
-        <ButtonSubmit type="submit">
+        <ButtonSubmit disabled={isSubmitDisable} type="submit">
           <Play />
           Começar
         </ButtonSubmit>

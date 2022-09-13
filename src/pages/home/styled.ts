@@ -90,6 +90,9 @@ export const ButtonSubmit = styled.button`
   border: none;
   gap: 0.5rem;
   &:hover {
-    background: ${(props) => props.theme['gray-700']};
+    background: ${(props) => props.theme['green-700']};
+  }
+  :disabled {
+    background: ${(props) => props.theme['gray-500']};
   }
 `
