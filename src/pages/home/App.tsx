@@ -22,38 +22,29 @@ const newCycleFormValidationSchema = zod.object({
     .min(5, 'O ciclo precisa ser de no mínimo 5 minutos.')
     .max(60, 'O ciclo precisa ser de no máximo 60 minutos.'),
 })
-<<<<<<< HEAD
+
 type NewCycleFormData = zod.infer<typeof newCycleFormValidationSchema>
 
 interface Cycle{ //Cycle
   id: string
   task: string
   minutesAmount: number
-  
-=======
-interface NewCycleFormData {
-  task: string
-  minutesAmount: Number
->>>>>>> a1daae5fe9d81846853102e89f128bdd921d6faa
 }
+
 
 export function App() {
 
   const [ cycles, setCycles ] = useState<Cycle[]>([])
+  const [ amoutSecondPassed, setAmoutSecondPassed ] = useState(0)
+
 
   const [activecycleid, setActivecycleid] = useState<string | null>(null)
 
   const { register, handleSubmit, watch } = useForm({
     resolver: zodResolver(newCycleFormValidationSchema),
-<<<<<<< HEAD
-    defaultValues:{
-      task: '',
-      minutesAmout: 0,
-=======
     defaultValues: {
       task: '',
       minutesAmount: 0,
->>>>>>> a1daae5fe9d81846853102e89f128bdd921d6faa
     }
   })
 
@@ -69,12 +60,22 @@ export function App() {
     setCycles((state) => [...state, newCycle] )
 
     setActivecycleid(id)
-    reset()
   }
 
   const activeCycle = cycles.find((cycle) => cycle.id === activecycleid)
 
-  console.log(activeCycle)
+  const totalSecond = activeCycle ? activeCycle.minutesAmount * 60 : 0
+
+  const currentSecond = activeCycle ? totalSecond - amoutSecondPassed : 0
+
+  const minutesAmount = Math.floor(currentSecond / 60)
+
+  const secondsAmout = currentSecond % 60
+
+  const minutes = String(minutesAmount).padStart(2, '0')
+  const seconds = String(minutesAmount).padStart(2, '0')
+
+
 
   const task = watch('task')
   const isSubmitDisable = !task
@@ -114,11 +115,11 @@ export function App() {
         </Content>
 
         <MinutesContent>
-          <span>0</span>
-          <span>0</span>
+          <span>{minutes[0]}</span>
+          <span>{seconds[1]}</span>
           <Separar>:</Separar>
-          <span>0</span>
-          <span>0</span>
+          <span>{seconds[1]}</span>
+          <span>{seconds[1]}</span>
         </MinutesContent>
 
         <ButtonSubmit disabled={isSubmitDisable} type="submit">
