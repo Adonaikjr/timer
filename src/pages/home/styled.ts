@@ -73,6 +73,9 @@ export const MinutesContent = styled.div`
     border-radius: 8px;
     font-size: 10rem;
   }
+  .one,.tree{
+    background: red;
+  }
 `
 export const Separar = styled.span`
   color: ${(props) => props.theme['green-500']};
